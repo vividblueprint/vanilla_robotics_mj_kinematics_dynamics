@@ -1,0 +1,21 @@
+<mujoco>
+    <worldbody>
+        <body name="ball" pos="0 0 .5">
+            <freejoint />
+            <geom size=".2" mass="1" type="sphere" />
+        </body>
+    </worldbody>
+</mujoco>
+
+<!-- <mujoco>
+    <asset>
+        <mesh name="mesh_a" vertex="0 0 0 1 0 0 0 1 0 0 0 1" />
+        <mesh name="mesh_b" vertex="0 0 0 2 0 0 0 2 0 0 0 2" />
+    </asset>
+    <worldbody>
+        <body pos="0 0 1">
+            <freejoint />
+            <geom name="obj" type="mesh" mesh="mesh_a" />
+        </body>
+    </worldbody>
+</mujoco> -->

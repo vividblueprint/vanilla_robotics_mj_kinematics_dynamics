@@ -1,0 +1,53 @@
+<mujoco>
+  <option gravity = "0 0 0"/>
+   <worldbody>
+      <light diffuse="0 0 0" pos="0 0 10" dir="0 0 -1"/>
+      <geom type="plane" size="2.5 2.5 0.01" rgba="1 1 1 1" pos = "0 0 -0.1"/>
+      <body name = "body1" pos="0 0 0">
+        <inertial mass="1" pos="0.5 0 0" fullinertia="1 1 0.1 0 0 0"/>
+         <joint name="joint1" type="hinge" axis = "0 0 1" pos = "0 0 0"/>
+         <geom type="box" size="0.5 0.05 0.05" rgba="0.9 0 0 1" pos="0.5 0 0"/>
+         <body name = "body2" pos="1 0 0.1"> <!-- put wrt to body frame of previous body -->
+           <inertial mass="1" pos="0.5 0 0" fullinertia="1 1 0.1 0 0 0"/> <!-- put wrt to body frame -->
+           <joint name="joint2" type="hinge" axis = "0 0 1" pos = "0 0 0"/> <!-- put wrt to body frame -->
+           <geom type="box" size="0.5 0.05 0.05" rgba="0 0 0.9 1" pos="0.5 0 0"/> <!-- key: put geom frame 0.5,0,0 from body frame -->
+           <body name = "body3" pos="1 0 0.1">
+             <inertial mass="0.2" pos="0.125 0 0" fullinertia="0.1 0.1 0.02 0 0 0"/>
+             <joint name="joint3" type="hinge" axis = "0 0 1" pos = "0 0 0"/>
+             <geom type="box" size="0.125 0.05 0.05" rgba="0 0.9 0 1" pos="0.125 0 0"/>
+             <!-- <geom type="box" size="0.1 0.05 0.05" rgba="0 0.9 0 1" pos="0.125 0 0" euler="0 0 90"/> -->
+             <!-- <geom type="box" size="0.1 0.05 0.05" rgba="0 0.9 0 1" pos="0.25 0.15 0" /> -->
+             <!-- <geom type="box" size="0.1 0.05 0.05" rgba="0 0.9 0 1" pos="0.25 -0.15 0" /> -->
+             <site name="tip" pos="0.25 0 0" size="0.01" rgba="1 0 0 1"/>
+           </body>
+         </body>
+      </body>
+      <body name="reference" pos="0 0 0" mocap="true">
+        <geom type="box" size=".05 .05 .05" rgba=".9 .9 0 1"/>
+      </body>
+      <body name = "via0" pos="1.0 1.5 0.2"  euler="0 0 90">
+        <geom type="box" size="0.125 0.05 0.05" rgba=".1 .1 .1 1" pos="-0.125 0 0"/>
+      </body>
+      <body name = "via1" pos="1.0 0.75 0.2"  euler="0 0 45">
+        <geom type="box" size="0.125 0.05 0.05" rgba=".1 .1 .1 1" pos="-0.125 0 0"/>
+      </body>
+      <body name = "via2" pos="-0.5 0.5 0.2"  euler="0 0 90">
+        <geom type="box" size="0.125 0.05 0.05" rgba=".1 .1 .1 1" pos="-0.125 0 0"/>
+      </body>
+      <body name = "via3" pos="-1 1.5 0.2"  euler="0 0 180">
+        <geom type="box" size="0.125 0.05 0.05" rgba=".1 .1 .1 1" pos="-0.125 0 0"/>
+      </body>
+   </worldbody>
+   <sensor>
+     <framepos objtype="site" objname="tip"/>
+   </sensor>
+   <actuator>
+     <position name="joint1" joint="joint1" kp="10" kv="10"/>
+     <position name="joint2" joint="joint2" kp="10" kv="10"/>
+     <position name="joint3" joint="joint3" kp="10" kv="10"/>
+   </actuator>
+   <keyframe>
+     <key name="home" qpos="0 0 0" ctrl="1.57 -1.57 1.57"/>
+     <!-- <key name="home" qpos="1.57 -1.57 1.57" ctrl="1.57 -1.57 1.57"/> -->
+   </keyframe>
+</mujoco>

@@ -1,0 +1,57 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "MuJoCo USD Converter v0.6.1"
+    }
+    defaultPrim = "balance_bot_scene"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+over "balance_bot_scene" (
+    prepend apiSchemas = ["IsaacRobotAPI"]
+)
+{
+    prepend rel isaac:physics:robotJoints = [
+        </balance_bot_scene/Geometry/chassis/wheel_left/left_wheel_joint>,
+        </balance_bot_scene/Geometry/chassis/wheel_right/right_wheel_joint>,
+    ]
+    prepend rel isaac:physics:robotLinks = [
+        </balance_bot_scene/Geometry/chassis>,
+        </balance_bot_scene/Geometry/chassis/wheel_left>,
+        </balance_bot_scene/Geometry/chassis/wheel_right>,
+    ]
+    token isaac:robotType = "Default"
+
+    over "Geometry"
+    {
+        over "chassis" (
+            prepend apiSchemas = ["IsaacLinkAPI"]
+        )
+        {
+            over "wheel_left" (
+                prepend apiSchemas = ["IsaacLinkAPI"]
+            )
+            {
+                over "left_wheel_joint" (
+                    prepend apiSchemas = ["IsaacJointAPI"]
+                )
+                {
+                }
+            }
+
+            over "wheel_right" (
+                prepend apiSchemas = ["IsaacLinkAPI"]
+            )
+            {
+                over "right_wheel_joint" (
+                    prepend apiSchemas = ["IsaacJointAPI"]
+                )
+                {
+                }
+            }
+        }
+    }
+}
+
